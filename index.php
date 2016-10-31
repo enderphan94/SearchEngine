@@ -69,7 +69,7 @@ catch (Exception $e) {
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-primary">
 				<div class="panel-heading"><h2>The search box</h2></div>
-				<div class="alert alert-info"><span class="glyphicon glyphicon-time" style="display: none;"></span><span id="query-time"></span><br><span id="query-items">Enter the items you want to search below:</span></div>
+				<div class="alert alert-info"><span class="glyphicon glyphicon-time" style="display: none;"></span><span id="query-time"></span><br><span id="query-items"></span><span id="query-count">Enter the items you want to search below:</span></div>
 				
 				<div class="panel-body">
 					<div class="form-group">
@@ -119,7 +119,8 @@ $(function() { // DOM ready
 		searchTimeout = setTimeout(function() {
 			$.get('search.php?q=' + $('#search').val(), function(data) {
 				$('#query-time').text('SQL query took ' + data.query_time + 'seconds');
-				$('#query-items').text('The items have found is: '+ data.count);
+				$('#query-items').text('The items have found is: ');
+				$('#query-count').text(data.count,this).css("color","red");
 				var table = $('#search-results').empty();
 				var l = data.products.length;
 				if (l) {
